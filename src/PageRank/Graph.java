@@ -1,9 +1,5 @@
 package PageRank;
 
-import com.sun.org.apache.bcel.internal.generic.FLOAD;
-
-import java.util.Arrays;
-
 public class Graph {
   private float[][] matrix; // 邻接矩阵
   private float[] vertices; // 顶点信息
