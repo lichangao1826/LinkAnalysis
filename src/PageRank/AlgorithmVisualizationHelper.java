@@ -103,8 +103,8 @@ public class AlgorithmVisualizationHelper {
     toY = (int) position[3];
     g.drawLine(fromX, fromY, toX, toY);
 
-    float H = 10; // 箭头高度
-    float L = 4; // 底边的一半
+    float H = 15; // 箭头高度
+    float L = 5; // 底边的一半
     float angle = (float) Math.atan(L / H); // 箭头角度
     float arrowLen = (float) Math.sqrt(L * L + H * H); // 箭头的长度
     float[] arrXY_1 = rotateVec(toX - fromX, toY - fromY, angle, arrowLen);

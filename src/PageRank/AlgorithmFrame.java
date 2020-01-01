@@ -58,7 +58,7 @@ public class AlgorithmFrame extends JFrame {
       g2d.addRenderingHints(hints);
 
       // 具体绘制
-//      g2d.setColor(AlgorithmVisualizationHelper.Red);
+      AlgorithmVisualizationHelper.setStrokeWidth(g2d, 3);
       float[] vertices = graph.getVertices();
       for (int i = 0; i < graph.getSize(); i++) {
         int[] position =  graph.getVertexPosition(i);
