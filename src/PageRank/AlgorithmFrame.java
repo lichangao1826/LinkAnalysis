@@ -2,6 +2,7 @@ package PageRank;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class AlgorithmFrame extends JFrame {
 
@@ -59,11 +60,18 @@ public class AlgorithmFrame extends JFrame {
 
       // 具体绘制
       AlgorithmVisualizationHelper.setStrokeWidth(g2d, 3);
+      DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+      int minR = 20;
+      int baseR = 30;
       float[] vertices = graph.getVertices();
       for (int i = 0; i < graph.getSize(); i++) {
-        int[] position =  graph.getVertexPosition(i);
-        AlgorithmVisualizationHelper.strokeCircle(g2d, position[0], position[1], 20);
-        AlgorithmVisualizationHelper.drawText(g2d, String.valueOf(vertices[i]), position[0], position[1]);
+        int[] position = graph.getVertexPosition(i);
+        int r = (int) vertices[i] * baseR < minR ? minR : (int) vertices[i] * baseR;
+
+        AlgorithmVisualizationHelper.strokeCircle(g2d, position[0], position[1], r);
+        String score = decimalFormat.format(vertices[i]);
+        AlgorithmVisualizationHelper.drawText(g2d, score, position[0], position[1]);
       }
 
       float[][] matrix = graph.getMatrix();
@@ -74,7 +82,9 @@ public class AlgorithmFrame extends JFrame {
             int fromY = graph.getVertexPosition(i)[1];
             int toX = graph.getVertexPosition(j)[0];
             int toY = graph.getVertexPosition(j)[1];
-            AlgorithmVisualizationHelper.drawArrowLine(g2d, fromX, fromY, toX, toY, 20, 20);
+            int fromR = (int) vertices[i] * baseR < minR ? minR : (int) vertices[i] * baseR;
+            int toR = (int) vertices[j] * baseR < minR ? minR : (int) vertices[j] * baseR;
+            AlgorithmVisualizationHelper.drawArrowLine(g2d, fromX, fromY, toX, toY, fromR, toR);
           }
         }
       }

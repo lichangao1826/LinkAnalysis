@@ -2,7 +2,8 @@ package PageRank;
 
 public class Graph {
   private float[][] matrix; // 邻接矩阵
-  private float[] vertices; // 顶点信息
+  private float[] vertices; // 顶点权重
+  private int[] outLinks; // 顶点出链数
   private int[][] position = {
     {400, 400}, {550, 100}, {700, 400}, {550, 700}, {250, 700}, {100, 400}, {250, 100}
   }; // 顶点位置信息
@@ -10,12 +11,13 @@ public class Graph {
 
   public Graph() {
     matrix = new float[N][N];
-    for (int i = 0; i < N; i ++) {
-      for (int j = 0; j < N; j ++) {
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
         matrix[i][j] = Float.POSITIVE_INFINITY;
       }
     }
     vertices = new float[N];
+    outLinks = new int[N];
   }
 
   public int getSize() {
@@ -34,11 +36,16 @@ public class Graph {
     return position[v];
   }
 
-  private void saveVertex(int v, float score) {
+  public int getOutLinkCount(int v) {
+    return outLinks[v];
+  }
+
+  public void saveVertex(int v, float score) {
     vertices[v] = score;
   }
 
-  private void saveEdge(int v1, int v2, float weight) {
+  public void saveEdge(int v1, int v2, float weight) {
+    outLinks[v1] += 1;
     matrix[v1][v2] = weight;
   }
 

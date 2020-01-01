@@ -36,11 +36,23 @@ public class AlgorithmVisualizer {
 
   // 动画逻辑
   private void run() {
-    frame.render(graph);
+    while (true) {
+      frame.render(graph);
+      AlgorithmVisualizationHelper.pause(20);
+    }
   }
 
   // TODO: 根据情况决定是否实现键盘鼠标等交互事件监听器类
-  private class AlgorithmKeyListener extends KeyAdapter {}
+  private class AlgorithmKeyListener extends KeyAdapter {
+
+    @Override
+    public void keyReleased(KeyEvent event) {
+      if (event.getKeyChar() == ' ') {
+        PageRankAlgorithm pageRank = new PageRankAlgorithm(graph);
+        graph = pageRank.calcPageRank(1, 0.00001f);
+      }
+    }
+  }
 
   private class AlgorithmMouseListener extends MouseAdapter {}
 
