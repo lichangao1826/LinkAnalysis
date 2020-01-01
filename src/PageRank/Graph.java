@@ -1,34 +1,36 @@
 package PageRank;
 
+import com.sun.org.apache.bcel.internal.generic.FLOAD;
+
 import java.util.Arrays;
 
 public class Graph {
-  private double[][] matrix; // 邻接矩阵
-  private double[] vertices; // 顶点信息
+  private float[][] matrix; // 邻接矩阵
+  private float[] vertices; // 顶点信息
   private int[][] position = {
     {400, 400}, {550, 100}, {700, 400}, {550, 700}, {250, 700}, {100, 400}, {250, 100}
   }; // 顶点位置信息
   private int N = 7; // 默认顶点数
 
   public Graph() {
-    matrix = new double[N][N];
+    matrix = new float[N][N];
     for (int i = 0; i < N; i ++) {
       for (int j = 0; j < N; j ++) {
-        matrix[i][j] = Double.POSITIVE_INFINITY;
+        matrix[i][j] = Float.POSITIVE_INFINITY;
       }
     }
-    vertices = new double[N];
+    vertices = new float[N];
   }
 
   public int getSize() {
     return N;
   }
 
-  public double[][] getMatrix() {
+  public float[][] getMatrix() {
     return matrix;
   }
 
-  public double[] getVertices() {
+  public float[] getVertices() {
     return vertices;
   }
 
@@ -36,11 +38,11 @@ public class Graph {
     return position[v];
   }
 
-  private void saveVertex(int v, double score) {
+  private void saveVertex(int v, float score) {
     vertices[v] = score;
   }
 
-  private void saveEdge(int v1, int v2, double weight) {
+  private void saveEdge(int v1, int v2, float weight) {
     matrix[v1][v2] = weight;
   }
 

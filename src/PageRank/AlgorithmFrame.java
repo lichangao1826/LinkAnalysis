@@ -59,15 +59,17 @@ public class AlgorithmFrame extends JFrame {
 
       // 具体绘制
 //      g2d.setColor(AlgorithmVisualizationHelper.Red);
+      float[] vertices = graph.getVertices();
       for (int i = 0; i < graph.getSize(); i++) {
         int[] position =  graph.getVertexPosition(i);
         AlgorithmVisualizationHelper.strokeCircle(g2d, position[0], position[1], 20);
+        AlgorithmVisualizationHelper.drawText(g2d, String.valueOf(vertices[i]), position[0], position[1]);
       }
 
-      double[][] matrix = graph.getMatrix();
+      float[][] matrix = graph.getMatrix();
       for (int i = 0; i < graph.getSize(); i++) {
         for (int j = 0; j < graph.getSize(); j++) {
-          if (matrix[i][j] != Double.POSITIVE_INFINITY) {
+          if (matrix[i][j] != Float.POSITIVE_INFINITY) {
             int fromX = graph.getVertexPosition(i)[0];
             int fromY = graph.getVertexPosition(i)[1];
             int toX = graph.getVertexPosition(j)[0];

@@ -80,14 +80,14 @@ public class AlgorithmVisualizationHelper {
     g.drawImage(image, x, y, null);
   }
 
-  public static void drawText(Graphics2D g, String text, int centerx, int centery) {
+  public static void drawText(Graphics2D g, String text, int x, int y) {
 
     if (text == null) throw new IllegalArgumentException("Text is null in drawText function!");
 
     FontMetrics metrics = g.getFontMetrics();
     int w = metrics.stringWidth(text);
     int h = metrics.getDescent();
-    g.drawString(text, centerx - w / 2, centery + h);
+    g.drawString(text, x - w / 2, y + h);
   }
 
   public static void drawLine(Graphics2D g, int fromX, int fromY, int toX, int toY) {
@@ -96,23 +96,23 @@ public class AlgorithmVisualizationHelper {
 
   public static void drawArrowLine(
       Graphics2D g, int fromX, int fromY, int toX, int toY, int fromR, int toR) {
-    double[] position = convertXY(fromX, fromY, toX, toY, fromR, toR);
+    float[] position = convertXY(fromX, fromY, toX, toY, fromR, toR);
     fromX = (int) position[0];
     fromY = (int) position[1];
     toX = (int) position[2];
     toY = (int) position[3];
     g.drawLine(fromX, fromY, toX, toY);
 
-    double H = 10; // 箭头高度
-    double L = 4; // 底边的一半
-    double angle = Math.atan(L / H); // 箭头角度
-    double arrowLen = Math.sqrt(L * L + H * H); // 箭头的长度
-    double[] arrXY_1 = rotateVec(toX - fromX, toY - fromY, angle, arrowLen);
-    double[] arrXY_2 = rotateVec(toX - fromX, toY - fromY, -angle, arrowLen);
-    double x1 = toX - arrXY_1[0];
-    double y1 = toY - arrXY_1[1];
-    double x2 = toX - arrXY_2[0];
-    double y2 = toY - arrXY_2[1];
+    float H = 10; // 箭头高度
+    float L = 4; // 底边的一半
+    float angle = (float) Math.atan(L / H); // 箭头角度
+    float arrowLen = (float) Math.sqrt(L * L + H * H); // 箭头的长度
+    float[] arrXY_1 = rotateVec(toX - fromX, toY - fromY, angle, arrowLen);
+    float[] arrXY_2 = rotateVec(toX - fromX, toY - fromY, -angle, arrowLen);
+    float x1 = toX - arrXY_1[0];
+    float y1 = toY - arrXY_1[1];
+    float x2 = toX - arrXY_2[0];
+    float y2 = toY - arrXY_2[1];
     GeneralPath triangle = new GeneralPath();
     triangle.moveTo(toX, toY);
     triangle.lineTo(x1, y1);
@@ -122,9 +122,9 @@ public class AlgorithmVisualizationHelper {
     g.draw(triangle);
   }
 
-  private static double[] convertXY(int fromX, int fromY, int toX, int toY, int fromR, int toR) {
-    double d = Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2)) - 5;
-    double[] result = new double[4];
+  private static float[] convertXY(int fromX, int fromY, int toX, int toY, int fromR, int toR) {
+    float d = (float) Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2)) - 5;
+    float[] result = new float[4];
     result[0] = fromX - fromR * (fromX - toX) / d;
     result[1] = fromY - fromR * (fromY - toY) / d;
     result[2] = toX - toR * (toX - fromX) / d;
@@ -132,16 +132,16 @@ public class AlgorithmVisualizationHelper {
     return result;
   }
 
-  private static double[] rotateVec(int px, int py, double ang, double newLen) {
-    double[] mathStr = new double[2];
+  private static float[] rotateVec(int px, int py, float ang, float newLen) {
+    float[] mathStr = new float[2];
     // 矢量旋转函数，参数含义分别是x分量、y分量、旋转角、是否改变长度、新长度
     double vx = px * Math.cos(ang) - py * Math.sin(ang);
     double vy = px * Math.sin(ang) + py * Math.cos(ang);
     double d = Math.sqrt(vx * vx + vy * vy);
     vx = vx / d * newLen;
     vy = vy / d * newLen;
-    mathStr[0] = vx;
-    mathStr[1] = vy;
+    mathStr[0] = (float) vx;
+    mathStr[1] = (float) vy;
     return mathStr;
   }
 }
