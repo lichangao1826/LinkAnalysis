@@ -26,9 +26,8 @@ public class PageRankAlgorithm {
           if (TPMatrix[j][i] != 0) {
             newVertices[i] += oldVertices[j] * TPMatrix[j][i];
           }
-          graph.saveVertex(i, newVertices[i]);
-          System.out.println(newVertices[i]);
         }
+        graph.saveVertex(i, newVertices[i]);
       }
       return calcPageRank(round - 1, alpha);
     }
