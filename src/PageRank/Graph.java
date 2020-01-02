@@ -49,7 +49,7 @@ public class Graph {
     matrix[v1][v2] = weight;
   }
 
-  public void initGraph() {
+  public void initSimpleGraph() {
     for (int i = 0; i < N; i++) {
       saveVertex(i, 1);
     }
@@ -71,5 +71,24 @@ public class Graph {
     saveEdge(5, 0, 0);
     saveEdge(5, 4, 0);
     saveEdge(6, 4, 0);
+  }
+
+  public void initTrapGraph() {
+    for (int i = 0; i < N; i++) {
+      saveVertex(i, 1);
+    }
+    saveEdge(0, 6, 0);
+    saveEdge(1, 0, 0);
+    saveEdge(2, 0, 0);
+    saveEdge(2, 1, 0);
+    saveEdge(3, 1, 0);
+    saveEdge(3, 2, 0);
+    saveEdge(3, 4, 0);
+    saveEdge(4, 0, 0);
+    saveEdge(4, 2, 0);
+    saveEdge(4, 3, 0);
+    saveEdge(4, 5, 0);
+    saveEdge(5, 0, 0);
+    saveEdge(6, 5, 0);
   }
 }

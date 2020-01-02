@@ -15,7 +15,8 @@ public class AlgorithmVisualizer {
 
     // 初始化数据
     graph = new Graph();
-    graph.initGraph();
+//    graph.initSimpleGraph();
+    graph.initTrapGraph();
 
     // 初始化视图
     EventQueue.invokeLater(

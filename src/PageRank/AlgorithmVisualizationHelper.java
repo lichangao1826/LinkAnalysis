@@ -123,7 +123,7 @@ public class AlgorithmVisualizationHelper {
   }
 
   private static float[] convertXY(int fromX, int fromY, int toX, int toY, int fromR, int toR) {
-    float d = (float) Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2)) - 5;
+    float d = (float) Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2));
     float[] result = new float[4];
     result[0] = fromX - fromR * (fromX - toX) / d;
     result[1] = fromY - fromR * (fromY - toY) / d;
