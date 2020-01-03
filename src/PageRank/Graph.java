@@ -9,6 +9,8 @@ public class Graph {
   }; // 顶点位置信息
   private int N = 7; // 默认顶点数
 
+  public boolean pageRankFinish = false;
+
   public Graph() {
     matrix = new float[N][N];
     for (int i = 0; i < N; i++) {

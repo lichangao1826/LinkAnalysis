@@ -18,9 +18,11 @@ public class PageRankAlgorithm {
    */
   public Graph calcPageRank(int round, float alpha) {
     if (round > 0) {
-      float[] oldVertices;
+      float[] oldVertices = new float[N];
       float[] newVertices = new float[N];
-      oldVertices = graph.getVertices();
+      for (int i = 0; i < graph.getSize(); i ++) {
+        oldVertices[i] = graph.getVertices()[i];
+      }
       for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
           if (TPMatrix[j][i] != 0) {
@@ -29,13 +31,22 @@ public class PageRankAlgorithm {
         }
         graph.saveVertex(i, newVertices[i]);
       }
+      if (checkFinish(oldVertices, newVertices, alpha)) {
+        graph.pageRankFinish = true;
+        return graph;
+      }
       return calcPageRank(round - 1, alpha);
     }
     return graph;
   }
 
   private boolean checkFinish(float[] oldVertices, float[] newVertices, float alpha) {
-    // TODO
+    for (int i = 0; i < oldVertices.length; i ++) {
+      System.out.println(Math.abs(newVertices[i] - oldVertices[i]));
+      if (Math.abs(newVertices[i] - oldVertices[i]) >= alpha) {
+        return false;
+      }
+    }
     return true;
   }
 

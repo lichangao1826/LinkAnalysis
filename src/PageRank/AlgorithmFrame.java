@@ -88,6 +88,10 @@ public class AlgorithmFrame extends JFrame {
           }
         }
       }
+
+      if (graph.pageRankFinish) {
+        AlgorithmVisualizationHelper.drawText(g2d, "迭代结束！", 720, 720);
+      }
     }
 
     @Override
