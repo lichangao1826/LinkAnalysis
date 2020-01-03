@@ -50,7 +50,7 @@ public class AlgorithmVisualizer {
     public void keyReleased(KeyEvent event) {
       if (event.getKeyChar() == ' ') {
         PageRankAlgorithm pageRank = new PageRankAlgorithm(graph);
-        graph = pageRank.calcPageRank(1, 0.00001f);
+        graph = pageRank.calcPageRank(1, 0.001f, false);
       }
     }
   }

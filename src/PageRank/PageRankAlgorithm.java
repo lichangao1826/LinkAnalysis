@@ -16,7 +16,7 @@ public class PageRankAlgorithm {
    * @param round 计算的轮次
    * @param alpha 迭代结束条件
    */
-  public Graph calcPageRank(int round, float alpha) {
+  public Graph calcPageRank(int round, float alpha, boolean randomJump) {
     if (round > 0) {
       float[] oldVertices = new float[N];
       float[] newVertices = new float[N];
@@ -26,16 +26,24 @@ public class PageRankAlgorithm {
       for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
           if (TPMatrix[j][i] != 0) {
-            newVertices[i] += oldVertices[j] * TPMatrix[j][i];
+            if (randomJump) {
+              newVertices[i] += 0.8 * oldVertices[j] * TPMatrix[j][i];
+            } else {
+              newVertices[i] += oldVertices[j] * TPMatrix[j][i];
+            }
           }
+        }
+        if (randomJump) {
+          newVertices[i] += 0.2 * 1 / N;
         }
         graph.saveVertex(i, newVertices[i]);
       }
+
       if (checkFinish(oldVertices, newVertices, alpha)) {
         graph.pageRankFinish = true;
         return graph;
       }
-      return calcPageRank(round - 1, alpha);
+      return calcPageRank(round - 1, alpha, randomJump);
     }
     return graph;
   }
