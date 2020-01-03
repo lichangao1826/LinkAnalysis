@@ -44,9 +44,11 @@ public class PageRankAlgorithm {
     for (int i = 0; i < oldVertices.length; i ++) {
       System.out.println(Math.abs(newVertices[i] - oldVertices[i]));
       if (Math.abs(newVertices[i] - oldVertices[i]) >= alpha) {
+        System.out.println();
         return false;
       }
     }
+    System.out.println();
     return true;
   }
 
